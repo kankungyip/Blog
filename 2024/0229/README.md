@@ -17,7 +17,7 @@ cd ~/esp
 git clone https://github.com/espressif/esp-idf.git
 ```
 
-!> 因为 MicroPython 并不一定支持最新版本的 ESP-IDF，所以要切换到正确的版本，需要更具最新 MicroPython 版本所[支持](https://github.com/micropython/micropython/tree/master/ports/esp32#setting-up-esp-idf-and-the-build-environment)的版本来选择。
+!> 因为 MicroPython 并不一定支持最新版本的 ESP-IDF，所以要切换到正确的版本，需要根据最新 MicroPython 版本所[支持](https://github.com/micropython/micropython/tree/v1.22-release/ports/esp32#setting-up-esp-idf-and-the-build-environment)的版本来选择。
 
 ```bash
 cd ~/esp/esp-idf
@@ -45,7 +45,7 @@ alias get_idf='. $HOME/esp/esp-idf/export.sh'
 更新 `.bashrc` 文件后，还需要重启终端窗口或运行下面的命令来刷新配置文件，并完成 ESP-IDF 的环境变量设置。
 
 ```bash
-source ~/.bashrc`
+source ~/.bashrc
 get_idf
 ```
 
@@ -59,6 +59,15 @@ get_idf
 mkdir -p ~/mpy
 cd ~/mpy
 git clone https://github.com/micropython/micropython.git
+cd ~/mpy/micropython
+git checkout v1.22-release
+```
+
+切换到最新的发行版本。
+
+```bash
+cd ~/mpy/micropython
+git checkout v1.22-release
 ```
 
 完成后首先编译 `mpy-cross` 工具，这是为了构建 MicroPython 的交叉编译器，只需要编译一次，之后编译固件不在需要重复，除非版本有更新。
@@ -90,11 +99,11 @@ make BOARD=ESP32_GENERIC_S3
 
 ### 准备 ST7789 驱动
 
-将 [ST7789 的 C 语言版本驱动](https://github.com/devbis/st7789_mpy) 克隆到 `~/mpy/st7789_mpy` 路径下。
+将 [ST7789 驱动](https://github.com/russhughes/st7789_mpy) 克隆到 `~/mpy/st7789_mpy` 路径下。
 
 ```bash
 cd ~/mpy
-git clone https://github.com/devbis/st7789_mpy.git
+git clone https://github.com/russhughes/st7789_mpy.git
 ```
 
 !> 如果要修改，可以对驱动进行修改，例如增加显示分辨率、增加更多绘图或写中文的功能等。
@@ -103,7 +112,19 @@ git clone https://github.com/devbis/st7789_mpy.git
 
 ```bash
 cd ~/mpy/micropython/ports/esp32
-make BOARD=ESP32_GENERIC_S3 USER_C_MODULES=../../../st7789_mpy/st7789/micropython.cmake
+make BOARD=ESP32_GENERIC_S3 USER_C_MODULES=~/mpy/st7789_mpy/st7789/micropython.cmake
 ```
 
 现在就得到了一个具有 ST7789 驱动的 ESP32-S3 的固件了。
+
+### 支持 octal-SPIRAM
+
+```bash
+cd ~/mpy/micropython/ports/esp32
+make BOARD=ESP32_GENERIC_S3 BOARD_VARIANT=SPIRAM_OCT USER_C_MODULES=~/mpy/st7789_mpy/st7789/micropython.cmake
+```
+
+### 编译好的固件下载
+
+- [ESP32-S3 with ST7789 v1.22.2](https://pan.quark.cn/s/e68515391396)
+- [ESP32-S3 octal-SPIRAM with ST7789 v1.22.2](https://pan.quark.cn/s/e68515391396)
