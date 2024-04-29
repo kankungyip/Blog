@@ -59,8 +59,6 @@ get_idf
 mkdir -p ~/mpy
 cd ~/mpy
 git clone https://github.com/micropython/micropython.git
-cd ~/mpy/micropython
-git checkout v1.22-release
 ```
 
 切换到最新的发行版本。
