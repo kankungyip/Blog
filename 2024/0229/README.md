@@ -79,7 +79,7 @@ make -C mpy-cross
 
 ```bash
 cd ~/mpy/micropython/ports/esp32
-make submodules
+make BOARD=ESP32_GENERIC_S3 submodules
 ```
 
 ### 编译测试

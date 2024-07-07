@@ -1,6 +1,6 @@
-今年又过了三分之一了，终于阶段性完成了第一个硬件项目（个人工作室项目）——开源编程游戏机“**Arcade**”。
+今年又过了三分之一了，终于阶段性完成了第一个硬件项目（个人工作室项目）——开源编程学习机“**Arcade**”。
 
-![](_media/arcade.jpg)
+![](_media/arcade.png)
 
 游戏机可以通过 [图形化编程（Scratch）](https://make.blockcode.fun/ "BlockCode Playground") 和 MicroPython 进行编程，直接制作游戏、动画或小程序，并且通过功能扩展接口连接外设解锁更多玩法——超声波测距、颜色识别、环境监测、舵机、摄像头等等。
 
